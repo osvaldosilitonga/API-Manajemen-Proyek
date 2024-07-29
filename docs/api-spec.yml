@@ -1,0 +1,922 @@
+swagger: "2.0"
+info:
+  title: PekGo
+  description: API description in Markdown.
+  version: 1.0.0
+host: localhost:9000
+basePath: /api/v1
+consumes:
+  - application/json
+produces:
+  - application/json
+schemes:
+  - https
+  - http
+securityDefinitions:
+  Authorization:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Enter the token
+paths:
+  /api/projects:
+    post:
+      tags:
+        - Project
+      summary: New Project
+      description: Create a new project
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - description: Project data
+        in: body
+        name: payload
+        required: true
+        schema:
+          type: object
+          properties: 
+            name:
+              type: string
+            description:
+              type: string
+      responses:
+        201:
+          description: Created
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 201
+              msg:
+                type: string
+                example: created
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        400:
+          description: Bad request
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 400
+              msg:
+                type: string
+                example: bad request
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+    get:
+      tags:
+        - Project
+      summary: Get all projects
+      description: Get all projects
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: ok
+              data:
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: project not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+  /api/projects/{id}:
+    get:
+      tags:
+        - Project
+      summary: Get project by ID
+      description: Get project detail by project ID
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Project ID
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: ok
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: project not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+    put:
+      tags:
+        - Project
+      summary: Update project details
+      description: Update project details
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Project ID
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: ok
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        400:
+          description: Bad Request
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 400
+              msg:
+                type: string
+                example: name or description cannot be empty
+              data:
+                type: string
+                example:
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: project not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+    delete:
+      tags:
+        - Project
+      summary: Delete project
+      description: Delete project
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Project ID
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: project deleted successfully
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: project not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+
+  /api/projects/{projectId}/tasks:
+    post:
+      tags:
+        - Project
+      summary: Create new project task
+      description: Create a new project task
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: path
+        name: projectId
+        type: string
+        required: true
+        description: Project ID
+      - description: Task data
+        in: body
+        name: payload
+        required: true
+        schema:
+          type: object
+          properties: 
+            title:
+              type: string
+              example: title example
+            description:
+              type: string
+              example: description example
+            start_time:
+              type: string
+              example: "2024-07-25"
+            end_time:
+              type: string
+              example: "2024-07-29"
+      responses:
+        201:
+          description: Created
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 201
+              msg:
+                type: string
+                example: created
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                    example: 6555cc4c1c02ad584854bdda
+                  title:
+                    type: string
+                    example: title example
+                  description:
+                    type: string
+                    example: description example
+                  start_time:
+                    type: string
+                    example: "2024-07-25"
+                  end_time:
+                    type: string
+                    example: "2024-07-29"
+                  is_complete:
+                    type: boolean
+                    example: false
+        400:
+          description: Bad request
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 400
+              msg:
+                type: string
+                example: bad request
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+    get:
+      tags:
+        - Project
+      summary: Get all project tasks
+      description: Get all project tasks
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: path
+        name: projectId
+        type: string
+        required: true
+        description: Project ID
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: ok
+              data:
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    id:
+                      type: string
+                      example: 6555cc4c1c02ad584854bdda
+                    title:
+                      type: string
+                      example: title example
+                    description:
+                      type: string
+                      example: description example
+                    start_time:
+                      type: string
+                      example: "2024-07-25"
+                    end_time:
+                      type: string
+                      example: "2024-07-29"
+                    is_complete:
+                      type: boolean
+                      example: false
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: task not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+  /api/tasks/{id}:
+    put:
+      tags:
+        - Task
+      summary: Update task
+      description: Update task
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: path
+        name: id
+        type: string
+        required: true
+        description: Task ID
+      - description: Task data
+        in: body
+        name: payload
+        required: true
+        schema:
+          type: object
+          properties: 
+            title:
+              type: string
+              example: title example
+            description:
+              type: string
+              example: description example
+            start_time:
+              type: string
+              example: "2024-07-25"
+            end_time:
+              type: string
+              example: "2024-07-29"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: ok
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                    example: 6555cc4c1c02ad584854bdda
+                  title:
+                    type: string
+                    example: title example
+                  description:
+                    type: string
+                    example: description example
+                  start_time:
+                    type: string
+                    example: "2024-07-25"
+                  end_time:
+                    type: string
+                    example: "2024-07-29"
+                  is_complete:
+                    type: boolean
+                    example: false
+        400:
+          description: Bad request
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 400
+              msg:
+                type: string
+                example: bad request
+              data:
+                type: string
+                example:
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: task not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+    delete:
+      tags:
+        - Task
+      summary: Delete task
+      description: Delete task
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: path
+        name: id
+        type: string
+        required: true
+        description: Task ID
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: task deleted successfully
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                    example: 6555cc4c1c02ad584854bdda
+                  title:
+                    type: string
+                    example: title example
+                  description:
+                    type: string
+                    example: description example
+                  start_time:
+                    type: string
+                    example: "2024-07-25"
+                  end_time:
+                    type: string
+                    example: "2024-07-29"
+                  is_complete:
+                    type: boolean
+                    example: false
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: task not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+      deprecated: false
+  /api/tasks/{id}/complete:
+    get:
+      tags:
+        - Task
+      summary: Mark the task as complete
+      description: Mark the task as complete
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: path
+        name: id
+        type: string
+        required: true
+        description: Task ID
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: task completed
+              data:
+                type: object
+                properties: 
+                  id:
+                    type: string
+                    example: 6555cc4c1c02ad584854bdda
+                  title:
+                    type: string
+                    example: title example
+                  description:
+                    type: string
+                    example: description example
+                  start_time:
+                    type: string
+                    example: "2024-07-25"
+                  end_time:
+                    type: string
+                    example: "2024-07-29"
+                  is_complete:
+                    type: boolean
+                    example: true
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: task not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+  /api/tasks:
+    get:
+      tags:
+        - Task
+      summary: Get all tasks with query params
+      description: Get all tasks with optional query params ex. `/api/tasks?complete=false`. The default is to fetch all tasks.
+      consumes:
+       - application/json
+      produces:
+       - application/json
+      parameters:
+      - in: query
+        name: complete
+        type: boolean
+        description: Complete Status
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 200
+              msg:
+                type: string
+                example: task completed
+              data:
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    id:
+                      type: string
+                      example: 6555cc4c1c02ad584854bdda
+                    title:
+                      type: string
+                      example: title example
+                    description:
+                      type: string
+                      example: description example
+                    start_time:
+                      type: string
+                      example: "2024-07-25"
+                    end_time:
+                      type: string
+                      example: "2024-07-29"
+                    is_complete:
+                      type: boolean
+                      example: true
+        400:
+          description: Bad Request
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 400
+              msg:
+                type: string
+                example: invalid query params
+              data:
+                type: string
+                example:
+        404:
+          description: Not Found
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 404
+              msg:
+                type: string
+                example: task not found
+              data:
+                type: string
+                example:
+        500:
+          description: Internal server error
+          schema:
+            type: object
+            properties: 
+              code:
+                type: integer
+                example: 500
+              msg:
+                type: string
+                example: something went wrong
+              data:
+                type: string
+                example:
+
+
+
+
