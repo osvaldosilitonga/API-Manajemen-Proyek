@@ -1,7 +1,9 @@
+const moment = require('moment')
 const ProjectsResponseDTO = require("../dto/project.dto")
 const Project = require("../models/project.model")
 
 const { validationResult } = require('express-validator')
+const TasksResponseDTO = require('../dto/task.dto')
 
 /* Create new project */
 const createProject = async (req, res) => {
@@ -172,10 +174,89 @@ const deleteProject = async (req, res) => {
     }
 }
 
+/** Create new project task */
+const createProjectTask = async (req, res) => {
+    const err = validationResult(req)
+    if (!err.isEmpty()) {
+        return res.status(400).json({
+            code: 400,
+            msg: err.array(),
+            data: null
+        })
+    }
+
+    const { id } = req.params
+    const { title, description, start_time, end_time } = req.body
+
+    if (start_time >= end_time) {
+        return res.status(400).json({
+            code: 400,
+            msg: "end date must be greater than start date",
+            data: null
+        })
+    }
+
+    try {
+        const project = await Project.findById(id)
+        if (!project) {
+            return res.status(404).json({
+                code: 404,
+                msg: 'Project not found',
+                data: null
+            })
+        }
+
+        // check schedule availability
+        const hasConflict = project.tasks.some(task => {
+            return (
+                moment(start_time).isBetween(task.start_time, task.end_time, null, '[]') ||
+                moment(end_time).isBetween(task.start_time, task.end_time, null, '[]') ||
+                moment(task.start_time).isBetween(start_time, end_time, null, '[]') ||
+                moment(task.end_time).isBetween(start_time, end_time, null, '[]')
+            )
+        })
+
+        if (hasConflict) {
+            return res.status(400).json({
+                code: 400,
+                msg: 'task schedule conflicts with existing tasks',
+                data: null
+            })
+        }
+
+        // add new task
+        project.tasks.push({
+            title,
+            description,
+            start_time,
+            end_time,
+            is_complete: false
+        })
+        await project.save()
+
+        const savedTask = project.tasks[project.tasks.length - 1]  // retrieve the last added data
+        const taskResponse = new TasksResponseDTO(savedTask)
+
+        res.status(201).json({
+            code: 201,
+            msg: 'Task added successfully',
+            data: taskResponse
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     createProject,
     getAllProject,
     findById,
     updateProject,
     deleteProject,
+    createProjectTask,
 }
