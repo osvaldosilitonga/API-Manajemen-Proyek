@@ -1,5 +1,5 @@
 const express = require('express')
-const { createProject, getAllProject, findById, update } = require("../controllers/project.controller.js")
+const { createProject, getAllProject, findById, updateProject, deleteProject } = require("../controllers/project.controller.js")
 
 const { check } = require('express-validator')
 const router = express.Router()
@@ -30,6 +30,9 @@ router.put("/:id", [
     check('description')
         .optional()
         .isLength({ min: 5 }).withMessage('description must be at least 5 characters'),
-], update)
+], updateProject)
+
+/** Delete project by ID route */
+router.delete("/:id", deleteProject)
 
 module.exports = router

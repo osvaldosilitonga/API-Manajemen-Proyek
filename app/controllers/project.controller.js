@@ -100,7 +100,8 @@ const findById = async (req, res) => {
     }
 }
 
-const update = async (req, res) => {
+/** Update project by ID */
+const updateProject = async (req, res) => {
     // Request validation
     const err = validationResult(req)
     if (!err.isEmpty()) {
@@ -141,9 +142,40 @@ const update = async (req, res) => {
     }
 }
 
+/** Delete project by ID */
+const deleteProject = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const project = await Project.findByIdAndDelete(id)
+        if (!project) {
+            return res.status(404).json({
+                code: 404, 
+                msg: "project not found",
+                data: null
+            })
+        }
+
+        projectResponse = new ProjectsResponseDTO(project)  // map to response DTO
+        return res.status(200).json({
+            code: 200,
+            msg: "project deleted successfully",
+            data: projectResponse
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     createProject,
     getAllProject,
     findById,
-    update,
+    updateProject,
+    deleteProject,
 }
