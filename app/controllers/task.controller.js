@@ -120,7 +120,7 @@ const taskComplete = async (req, res) => {
         const project = await Project.findOneAndUpdate(
             { 'tasks._id': id },
             { $set: { 'tasks.$.is_complete': true } },
-            { new: true } // Mengembalikan dokumen yang sudah diperbarui
+            { new: true }
         )
 
         if (!project) {
@@ -131,7 +131,6 @@ const taskComplete = async (req, res) => {
             })
         }
 
-        // Temukan task yang diperbarui dalam project yang sudah diperbarui
         const updatedTask = project.tasks.id(id);
 
         res.status(200).json({
