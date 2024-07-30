@@ -1,0 +1,351 @@
+_type: export
+__export_format: 4
+__export_date: 2024-07-30T07:37:01.715Z
+__export_source: insomnia.desktop.app:v9.3.2
+resources:
+  - _id: req_7720168eb39f41e1955d7d3b82f9a8ce
+    parentId: fld_959e3e274d034c0697db2266d6049b46
+    modified: 1722322586040
+    created: 1722321756424
+    url: http://localhost:3000/api/tasks/66a88e6696135692ee18b293
+    name: Complete task
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722321756424
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_959e3e274d034c0697db2266d6049b46
+    parentId: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    modified: 1722316784009
+    created: 1722316784009
+    name: Task
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1722316784009
+    _type: request_group
+  - _id: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    parentId: null
+    modified: 1722247627356
+    created: 1722247627356
+    name: API Manajemen Proyek
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_3dc3522258eb40df88369e414eeb7776
+    parentId: fld_959e3e274d034c0697db2266d6049b46
+    modified: 1722321166090
+    created: 1722320349217
+    url: http://localhost:3000/api/tasks/66a883e51cee473e9cc9513e
+    name: Delete task
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722320349217
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_02c9182abed142cbaed8e392ff200ed3
+    parentId: fld_959e3e274d034c0697db2266d6049b46
+    modified: 1722319902187
+    created: 1722316787532
+    url: http://localhost:3000/api/tasks/66a883a7ed1a69fcaee9b34c
+    name: Update task
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "title": "title example updae",
+          "description": "description example update",
+          "start_time": "2024-09-24",
+          "end_time": "2024-09-28"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722316787532
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d55007877dc649e8b7345940e374bf62
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722315413463
+    created: 1722315135949
+    url: http://localhost:3000/api/projects/66a84bb33d59cde0925302c1/tasks
+    name: Get all project tasks
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722315135949
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_a04da79051264d85a0d910aed2b864b7
+    parentId: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    modified: 1722267985455
+    created: 1722267985455
+    name: Project
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1722267985455
+    _type: request_group
+  - _id: req_a0c38bab947f4b9b9d7c73a1a61918db
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722324692463
+    created: 1722312543502
+    url: http://localhost:3000/api/projects/66a896bbb6cca99d1106aa7b/tasks
+    name: Create new project task
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title": "title example 2",
+          "description": "description example 2",
+          "start_time": "2024-07-16",
+          "end_time": "2024-07-17"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722312543502
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_00308c3f1a0b4be9bc3a6c5cbcf03a6c
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722310794050
+    created: 1722310590285
+    url: http://localhost:3000/api/projects/66a84b923d59cde0925302bc
+    name: Delete Project
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722310590285
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f6c02b95528d498090482e17153845af
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722309163648
+    created: 1722308564497
+    url: http://localhost:3000/api/projects/66a84bb33d59cde0925302c1
+    name: Update
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "updated name 2",
+        	"description": "updated description 2"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722308564497
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b2f68fac2d2643d6b04abf1156f0aa8c
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722306646639
+    created: 1722306471809
+    url: http://localhost:3000/api/projects/66a84bb33d59cde0925302c1
+    name: Get project by ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722306471809
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c8e7a949716248aeb1767c5d635e3e9a
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722303977676
+    created: 1722303945896
+    url: http://localhost:3000/api/projects
+    name: Get all projects
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722303945896
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_97f48915aee84396b61f7fcfbf1522a9
+    parentId: fld_a04da79051264d85a0d910aed2b864b7
+    modified: 1722306071065
+    created: 1722267988606
+    url: http://localhost:3000/api/projects
+    name: Create new project
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "project name",
+        	"description": "project description"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722267988606
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_74599c048b6a4302ae41ce0c057e21a8
+    parentId: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    modified: 1722247653690
+    created: 1722247633924
+    url: http://localhost:3000
+    name: Testing
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/9.3.2
+    authentication: {}
+    metaSortKey: -1722247633925
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_14cffc76410f4cc713f22556b1ab643893ef46d7
+    parentId: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    modified: 1722247627360
+    created: 1722247627360
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1722247627360
+    _type: environment
+  - _id: jar_14cffc76410f4cc713f22556b1ab643893ef46d7
+    parentId: wrk_2bcd70d5d6bd4232a3fa402b87d5e53c
+    modified: 1722247627364
+    created: 1722247627364
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
