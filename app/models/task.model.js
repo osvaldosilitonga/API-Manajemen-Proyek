@@ -9,6 +9,9 @@ const TaskSchema = mongoose.Schema({
         type: String,
         required: [true, "Please enter task description"],
     },
+    is_complete: {
+        type: Boolean
+    },
     start_time: {
         type: Date,
         required: [true, "Please enter start time"],
