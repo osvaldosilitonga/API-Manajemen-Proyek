@@ -252,6 +252,44 @@ const createProjectTask = async (req, res) => {
     }
 }
 
+/** Get all project task */
+const getAllProjectTask = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const project = await Project.findById(id)
+        if (!project) {
+            return res.status(404).json({
+                code: 404,
+                msg: 'Project not found',
+                data: null
+            })
+        }
+
+        const projectTask = project.tasks.map(task => new TasksResponseDTO(task))
+        if (projectTask.length === 0) {
+            return res.status(404).json({
+                code: 404,
+                msg: 'Tasks not found',
+                data: null
+            })
+        }
+
+        res.status(200).json({
+            code: 200,
+            msg: 'ok',
+            data: projectTask
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     createProject,
     getAllProject,
@@ -259,4 +297,5 @@ module.exports = {
     updateProject,
     deleteProject,
     createProjectTask,
+    getAllProjectTask,
 }

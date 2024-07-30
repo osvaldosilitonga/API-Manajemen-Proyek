@@ -1,5 +1,5 @@
 const express = require('express')
-const { createProject, getAllProject, findById, updateProject, deleteProject, createProjectTask } = require("../controllers/project.controller.js")
+const { createProject, getAllProject, findById, updateProject, deleteProject, createProjectTask, getAllProjectTask } = require("../controllers/project.controller.js")
 
 const { check } = require('express-validator')
 const router = express.Router()
@@ -35,7 +35,7 @@ router.put("/:id", [
 /** Delete project by ID route */
 router.delete("/:id", deleteProject)
 
-/** Create new project task */
+/** Create new project task route */
 router.post("/:id/tasks", [
     check('title')
         .notEmpty().withMessage('title cannot be empty')
@@ -50,5 +50,8 @@ router.post("/:id/tasks", [
         .notEmpty().withMessage('end time cannot be empty')
         .isISO8601().withMessage('time must be using ISO8601 format'),
 ], createProjectTask)
+
+/** Get all project task route*/
+router.get("/:id/tasks", getAllProjectTask)
 
 module.exports = router
