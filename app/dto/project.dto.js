@@ -1,4 +1,4 @@
-class GetAllProjectsResponse {
+class ProjectsResponseDTO {
     constructor(project) {
         this.id = project._id
         this.name = project.name
@@ -8,4 +8,4 @@ class GetAllProjectsResponse {
     }
 }
 
-module.exports = GetAllProjectsResponse;
+module.exports = ProjectsResponseDTO;

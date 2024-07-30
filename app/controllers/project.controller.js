@@ -1,4 +1,4 @@
-const GetAllProjectsResponse = require("../dto/project.dto")
+const ProjectsResponseDTO = require("../dto/project.dto")
 const Project = require("../models/project.model")
 
 const { validationResult } = require('express-validator')
@@ -20,18 +20,14 @@ const createProject = async (req, res) => {
         const project = new Project({name, description})
         await Project.create(project)
 
-        result = {
-            "code": 200,
-            "msg": "created",
-            "data": {
-                "id": project["_id"],
-                "name": project["name"],
-                "created_at": project["createdAt"],
-                "updated_at": project["updatedAt"]
-            }
-        }
+        // map to response dto
+        projectResponse = new ProjectsResponseDTO(project)
 
-        res.status(200).json(result)
+        res.status(200).json({
+            code: 200,
+            msg: "created",
+            data: projectResponse
+        })
     } catch (error) {
         res.status(500).json({
             code: 500, 
@@ -56,14 +52,14 @@ const getAllProject = async (req, res) => {
         }
 
         // map to response dto
-        const projectsResponse = projects.map(project => new GetAllProjectsResponse(project))
+        const projectsResponse = projects.map(project => new ProjectsResponseDTO(project))
 
         return res.status(200).json({
             code: 200,
             msg: "ok",
             data: projectsResponse
         })
-        
+
     } catch (error) {
         res.status(500).json({
             code: 500, 
