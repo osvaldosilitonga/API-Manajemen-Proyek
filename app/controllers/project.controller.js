@@ -69,7 +69,39 @@ const getAllProject = async (req, res) => {
     }
 }
 
+/** Get project by ID */
+const findById = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const project = await Project.findById(id)
+        if (!project) {
+            return res.status(404).json({
+                code: 404, 
+                msg: "project not found",
+                data: null
+            })
+        }
+
+        // map to response dto
+        const projectsResponse =new ProjectsResponseDTO(project)
+        return res.status(200).json({
+            code: 200,
+            msg: "ok",
+            data: projectsResponse
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     createProject,
-    getAllProject
+    getAllProject,
+    findById,
 }

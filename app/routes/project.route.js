@@ -1,5 +1,5 @@
 const express = require('express')
-const { createProject, getAllProject } = require("../controllers/project.controller.js")
+const { createProject, getAllProject, findById } = require("../controllers/project.controller.js")
 
 const { check } = require('express-validator')
 const router = express.Router()
@@ -17,5 +17,8 @@ router.post("/", [
 
 /** Get all project route */
 router.get("/", getAllProject)
+
+/** Get project by ID route */
+router.get("/:id", findById)
 
 module.exports = router
