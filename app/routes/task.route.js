@@ -1,5 +1,5 @@
 const express = require('express')
-const { updateTask, deleteTask } = require("../controllers/task.controller.js")
+const { updateTask, deleteTask, taskComplete } = require("../controllers/task.controller.js")
 
 const router = express.Router()
 
@@ -23,5 +23,8 @@ router.put("/:id", [
 
 /** Delete task by ID */
 router.delete("/:id", deleteTask)
+
+/** Mark task as complete by ID */
+router.get("/:id", taskComplete)
 
 module.exports = router

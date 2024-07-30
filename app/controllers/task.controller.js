@@ -113,7 +113,44 @@ const deleteTask = async (req, res) => {
     }
 }
 
+const taskComplete = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const project = await Project.findOneAndUpdate(
+            { 'tasks._id': id },
+            { $set: { 'tasks.$.is_complete': true } },
+            { new: true } // Mengembalikan dokumen yang sudah diperbarui
+        )
+
+        if (!project) {
+            return res.status(404).json({
+                code: 404,
+                msg: 'task not found',
+                data: null
+            })
+        }
+
+        // Temukan task yang diperbarui dalam project yang sudah diperbarui
+        const updatedTask = project.tasks.id(id);
+
+        res.status(200).json({
+            code: 200,
+            msg: 'complete status updated successfully',
+            data: updatedTask
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     updateTask,
     deleteTask,
+    taskComplete,
 }
