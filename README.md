@@ -1,4 +1,5 @@
 # Project Manajemen
+The RESTful API using Node.js allows users to manage projects and related tasks, including task scheduling. The API supports CRUD operations for projects and tasks, as well as scheduling features to ensure that no two tasks overlap in time for the same project.
 
 ## Tech Stack
 - Node JS
