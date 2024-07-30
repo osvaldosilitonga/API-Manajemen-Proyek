@@ -1,5 +1,5 @@
 const express = require('express')
-const { createProject, getAllProject, findById } = require("../controllers/project.controller.js")
+const { createProject, getAllProject, findById, update } = require("../controllers/project.controller.js")
 
 const { check } = require('express-validator')
 const router = express.Router()
@@ -20,5 +20,16 @@ router.get("/", getAllProject)
 
 /** Get project by ID route */
 router.get("/:id", findById)
+
+/** Update project by ID route */
+router.put("/:id", [
+    // request validation
+    check('name')
+        .optional()
+        .isLength({ min: 3 }).withMessage("name must be at least 3 characters"),
+    check('description')
+        .optional()
+        .isLength({ min: 5 }).withMessage('description must be at least 5 characters'),
+], update)
 
 module.exports = router
