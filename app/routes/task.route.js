@@ -1,11 +1,11 @@
 const express = require('express')
-const { updateTask } = require("../controllers/task.controller.js")
+const { updateTask, deleteTask } = require("../controllers/task.controller.js")
 
 const router = express.Router()
 
 const { check } = require('express-validator')
 
-/** Update task with ID */
+/** Update task by ID */
 router.put("/:id", [
     check('title')
         .notEmpty().withMessage('title cannot be empty')
@@ -20,5 +20,8 @@ router.put("/:id", [
         .notEmpty().withMessage('end time cannot be empty')
         .isISO8601().withMessage('time must be using ISO8601 format'),
 ], updateTask)
+
+/** Delete task by ID */
+router.delete("/:id", deleteTask)
 
 module.exports = router

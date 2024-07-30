@@ -83,6 +83,37 @@ const updateTask = async (req, res) => {
     }
 }
 
+const deleteTask = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const task = await Project.updateOne(
+            { 'tasks._id': id },
+            { $pull: { "tasks": { "_id": id } } }
+        )
+        if (!task) {
+            return res.status(404).json({
+                code: 404,
+                msg: 'Project not found',
+                data: null
+            })
+        }
+
+        res.status(200).json({
+            code: 200,
+            msg: 'Task deleted successfully',
+            data: null
+        })
+    } catch (error) {
+        res.status(500).json({
+            code: 500, 
+            msg: error.message,
+            data: null
+        })
+    }
+}
+
 module.exports = {
     updateTask,
+    deleteTask,
 }
